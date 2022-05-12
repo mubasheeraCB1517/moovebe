@@ -1,12 +1,12 @@
-class Responses<T> {
+class Response<T> {
   late Status status;
   late T data;
   late String message;
 
-  Responses.loading(this.message) : status = Status.LOADING;
-  Responses.completed(this.data) : status = Status.COMPLETED;
-  Responses.error(this.message) : status = Status.ERROR;
-  Responses.success(this.data) : status = Status.SUCCESS;
+  Response.loading(this.message) : status = Status.LOADING;
+  Response.completed(this.data) : status = Status.COMPLETED;
+  Response.error(this.message) : status = Status.ERROR;
+  Response.success(this.data) : status = Status.SUCCESS;
 
   @override
   String toString() {

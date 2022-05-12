@@ -1,0 +1,31 @@
+
+import 'package:flutter/material.dart';
+import 'package:moovbe/Bloc/driverListBloc.dart';
+import 'package:moovbe/Network/webApiProvider.dart';
+import 'package:moovbe/constants.dart';
+import 'package:moovbe/driverScreen.dart';
+
+class DriverDeleteRepository {
+  Future driverDelete( String? driverId,BuildContext context) async {
+    final Map<String, dynamic> _queryParameters = <String, dynamic>{
+      "driver_id":driverId,
+
+    };
+
+    final response = await WebApiProvider().getData(
+        url: "DriverApi/${apiKey}/",
+        isPost: false,
+        token: token,
+        isDelete: true,
+        queryParameters: _queryParameters,
+        isQueryParmeter: true).then((value){
+      if(value["status"] == true ){
+        Navigator.pop(context);
+        Navigator.pushNamed(context, "/driverScreen");
+
+      }
+    });
+    print("data->>>>>>>>>${response}");
+    return response;
+  }
+}

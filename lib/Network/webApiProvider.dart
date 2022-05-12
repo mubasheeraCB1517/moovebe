@@ -16,6 +16,7 @@ class WebApiProvider {
   Future<dynamic?> getData( {
     required String url,
     required bool isPost,
+    required bool isDelete,
     String? token,
     Map<String, dynamic>? queryParameters,
     required bool isQueryParmeter,
@@ -44,6 +45,14 @@ class WebApiProvider {
         _dio.options.headers['Content-Type'] =
         'application/json;encoding=utf-8';
         _dio.options.headers["summerpath"] = "$summerpath";
+      }
+      if (isDelete) {
+        if (isQueryParmeter) {
+          response = await _dio.delete("http://" + _endpoint + url,
+              data: queryParameters);
+        } else {
+          response = await _dio.delete("http://" + _endpoint + url);
+        }
       }
 
       if (isPost) {

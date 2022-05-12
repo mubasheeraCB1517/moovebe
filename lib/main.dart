@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:moovbe/driverScreen.dart';
 import 'package:moovbe/loginScreen.dart';
+import 'package:moovbe/sharedPreferences/sharedPreferences.dart';
 import 'package:moovbe/splashScreen.dart';
 
-void main() {
+void main() async{
+
   runApp(const MyApp());
 }
 
@@ -17,6 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/loginScreen': (context) => LoginScreen(),
+        '/driverScreen': (context) => DriverScreen(),
       },
       debugShowCheckedModeBanner: false,
       home: WelcomeScreen(),

@@ -1,19 +1,17 @@
 
-
-
-
 import 'package:moovbe/Network/webApiProvider.dart';
 
 class LoginRepository {
-  Future login() async {
+  Future login( String username,String password) async {
     final Map<String, dynamic> _queryParameters = <String, dynamic>{
-      "username":"admin_user",
-      "password":"123admin789"
+      "username":username,
+      "password":password
     };
 
     final response = await WebApiProvider().getData(
-        url: "loginApi",
+        url: "LoginApi",
         isPost: true,
+        isDelete: false,
         queryParameters: _queryParameters,
         isQueryParmeter: true);
     print("data->>>>>>>>>${response}");
