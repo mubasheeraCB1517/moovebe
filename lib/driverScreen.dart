@@ -43,7 +43,9 @@ class _DriverScreenState extends State<DriverScreen> {
                   case Status.LOADING:
                     return Container(
                       child: Center(
-                        child: CircularProgressIndicator(color: primaryColor,),
+                        child: CircularProgressIndicator(
+                          color: primaryColor,
+                        ),
                       ),
                     ); // LoadingScreen(loadingMessage: "Fetching", loadingColor: kPrimaryColor,);
                     break;
@@ -53,21 +55,21 @@ class _DriverScreenState extends State<DriverScreen> {
                       child: Stack(
                         children: [
                           Container(
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 20),
                             child: Text(
                               "${drivers.driver_list?.length ?? 0} Drivers Found",
-                              style: TextStyle(color: Colors.black45),
+                              style: const TextStyle(color: Colors.black45),
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 40, bottom: 130),
+                            margin: const EdgeInsets.only(top: 40, bottom: 130),
                             // margin: EdgeInsets.symmetric(horizontal: 20,vertical: 40),
                             child: ListView.builder(
                                 itemCount: drivers.driver_list?.length ?? 0,
                                 itemBuilder: (context, index) {
                                   return Container(
-                                    margin: EdgeInsets.symmetric(
+                                    margin: const EdgeInsets.symmetric(
                                         horizontal: 20, vertical: 10),
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
@@ -78,17 +80,17 @@ class _DriverScreenState extends State<DriverScreen> {
                                             color: Colors.grey.withOpacity(0.2),
                                             spreadRadius: 1,
                                             blurRadius: 3,
-                                            offset: Offset(1,
+                                            offset: const Offset(1,
                                                 1), // changes position of shadow
                                           ),
                                         ]),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Container(
                                           width: 80,
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                               horizontal: 20, vertical: 20),
                                           color: Colors.grey[100],
                                           child: CircleAvatar(
@@ -103,7 +105,7 @@ class _DriverScreenState extends State<DriverScreen> {
                                         ),
                                         // Image.asset("assets/images/profile.jpeg",fit: BoxFit.fill,)),
 
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 20,
                                         ),
                                         Column(
@@ -115,32 +117,39 @@ class _DriverScreenState extends State<DriverScreen> {
                                               Text(drivers.driver_list?[index]
                                                       .name ??
                                                   ""),
-                                              Text(drivers.driver_list?[index]
-                                                      .license_no ??
-                                                  ""),
+                                              Text(
+                                                  "License no:${drivers.driver_list?[0].license_no ?? ""}"),
                                             ]),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         GestureDetector(
-                                          onTap: (){
-                                            DriverDeleteRepository().driverDelete(drivers.driver_list?[index].id.toString(), context);
+                                          onTap: () {
+                                            DriverDeleteRepository()
+                                                .driverDelete(
+                                                    drivers
+                                                        .driver_list?[index].id
+                                                        .toString(),
+                                                    context);
                                           },
                                           child: Container(
-                                            padding: EdgeInsets.symmetric(
+                                            padding: const EdgeInsets.symmetric(
                                                 horizontal: 20, vertical: 5),
                                             decoration: BoxDecoration(
                                                 color: primaryColor,
                                                 borderRadius:
                                                     BorderRadius.circular(5)),
-                                            child: Center(
+                                            child: const Center(
                                                 child: Text(
                                               "Delete",
                                               style: TextStyle(
                                                   color: Colors.white),
                                             )),
                                           ),
-                                        )
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
                                       ],
                                     ),
                                   );
@@ -165,7 +174,7 @@ class _DriverScreenState extends State<DriverScreen> {
                                     borderRadius: BorderRadius.circular(10),
                                     color: primaryColor),
 
-                                child: Center(
+                                child: const Center(
                                     child: Text(
                                   "Add Driver",
                                   style: TextStyle(

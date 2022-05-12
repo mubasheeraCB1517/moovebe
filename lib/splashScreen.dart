@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moovbe/constants.dart';
-import 'package:moovbe/loginScreen.dart';
+
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -29,22 +29,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               left: 30,
               child: Center(
                 child: GestureDetector(
-                  onTap: (){
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+                  onTap: () {
+                    Navigator.of(context).popAndPushNamed("/loginScreen");
                   },
                   child: Container(
-                    decoration:const BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.white,
-                        borderRadius:
-                      BorderRadius.all(
-                            Radius.circular(
-                                12))),
+                        borderRadius: BorderRadius.all(Radius.circular(12))),
                     width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.symmetric(horizontal: 50,vertical: 20),
-
-                      child: Text("Get Started",textAlign: TextAlign.center,style: TextStyle(color: primaryColor,fontWeight: FontWeight.bold),),
-
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                    child: Text(
+                      "Get Started",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: primaryColor, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ),

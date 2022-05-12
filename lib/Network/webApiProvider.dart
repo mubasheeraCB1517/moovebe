@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:moovbe/Network/networkConstants.dart';
 
@@ -8,15 +7,15 @@ class WebApiProvider {
 
   WebApiProvider() {
     BaseOptions options =
-    BaseOptions(receiveTimeout: 50000, connectTimeout: 50000);
+        BaseOptions(receiveTimeout: 50000, connectTimeout: 50000);
     _dio = Dio(options);
-
   }
 
-  Future<dynamic?> getData( {
+  Future<dynamic?> getData({
     required String url,
     required bool isPost,
     required bool isDelete,
+    required bool isPatch,
     String? token,
     Map<String, dynamic>? queryParameters,
     required bool isQueryParmeter,
@@ -31,19 +30,19 @@ class WebApiProvider {
         _dio.options.headers["authorization"] = "Bearer ${token}";
       } else {
         _dio.options.headers['Content-Type'] =
-        'application/x-www-form-urlencoded';
+            'application/x-www-form-urlencoded';
         //_dio.options.headers["Authorization"] = null;
         _dio.options.headers["Access-Control-Allow-Origin"] =
-        "*"; // Required for CORS support to work
+            "*"; // Required for CORS support to work
         _dio.options.headers["Access-Control-Allow-Credentials"] =
-        "true"; // Required for cookies, authorization headers with HTTPS
+            "true"; // Required for cookies, authorization headers with HTTPS
         _dio.options.headers["Access-Control-Allow-Headers"] =
-        "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale";
+            "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale";
         _dio.options.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS";
       }
       if (summerpath != "" && summerpath != "") {
         _dio.options.headers['Content-Type'] =
-        'application/json;encoding=utf-8';
+            'application/json;encoding=utf-8';
         _dio.options.headers["summerpath"] = "$summerpath";
       }
       if (isDelete) {
@@ -52,6 +51,14 @@ class WebApiProvider {
               data: queryParameters);
         } else {
           response = await _dio.delete("http://" + _endpoint + url);
+        }
+      }
+      if (isPatch) {
+        if (isQueryParmeter) {
+          response = await _dio.patch("http://" + _endpoint + url,
+              data: queryParameters);
+        } else {
+          response = await _dio.patch("http://" + _endpoint + url);
         }
       }
 
@@ -74,10 +81,7 @@ class WebApiProvider {
       print('User Response: ${response.toString()}');
       print('User Info: ${response.data}');
 
-      try{
-
-      }
-      catch(ex){
+      try {} catch (ex) {
         //    print("Error occured in 401 checking : "+ ex.toString());
       }
       // if(!url.contains("userMenu")) {
@@ -121,14 +125,14 @@ class WebApiProvider {
           break;
         case DioErrorType.other:
           errorDescription =
-          "Connection to API server failed due to internet connection";
+              "Connection to API server failed due to internet connection";
           break;
         case DioErrorType.receiveTimeout:
           errorDescription = "Receive timeout in connection with API server";
           break;
         case DioErrorType.response:
           errorDescription =
-          "Received invalid status code: ${dioError.response!.statusCode}";
+              "Received invalid status code: ${dioError.response!.statusCode}";
 
           break;
         case DioErrorType.sendTimeout:
@@ -140,6 +144,4 @@ class WebApiProvider {
     }
     return errorDescription;
   }
-
-
 }

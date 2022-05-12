@@ -12,6 +12,7 @@ class LoginRepository {
         url: "LoginApi",
         isPost: true,
         isDelete: false,
+        isPatch: false,
         queryParameters: _queryParameters,
         isQueryParmeter: true);
     print("data->>>>>>>>>${response}");

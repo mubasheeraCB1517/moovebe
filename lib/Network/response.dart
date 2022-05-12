@@ -4,8 +4,11 @@ class Response<T> {
   late String message;
 
   Response.loading(this.message) : status = Status.LOADING;
+
   Response.completed(this.data) : status = Status.COMPLETED;
+
   Response.error(this.message) : status = Status.ERROR;
+
   Response.success(this.data) : status = Status.SUCCESS;
 
   @override
@@ -14,4 +17,4 @@ class Response<T> {
   }
 }
 
-enum Status { LOADING, COMPLETED, ERROR,SUCCESS }
+enum Status { LOADING, COMPLETED, ERROR, SUCCESS }

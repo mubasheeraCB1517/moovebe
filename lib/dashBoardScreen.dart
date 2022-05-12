@@ -21,7 +21,6 @@ class _DashBoardState extends State<DashBoard> {
   void initState() {
     super.initState();
     _bloc = BusListBloc();
-
   }
 
   @override
@@ -42,7 +41,7 @@ class _DashBoardState extends State<DashBoard> {
               if (snapshot.hasData) {
                 switch (snapshot.data!.status) {
                   case Status.LOADING:
-                    return Container(); // LoadingScreen(loadingMessage: "Fetching", loadingColor: kPrimaryColor,);
+                    return Container();
                     break;
                   case Status.SUCCESS:
                     buses = snapshot.data!.data;
@@ -55,7 +54,6 @@ class _DashBoardState extends State<DashBoard> {
                             children: [
                               Expanded(
                                   child: GestureDetector(
-
                                 child: Container(
                                   margin: EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 20),
@@ -143,7 +141,7 @@ class _DashBoardState extends State<DashBoard> {
                                               top: 65, left: 50),
                                           child: Image.asset(
                                             "assets/images/driver.png",
-                                            scale: 0.94,
+                                            scale: 1,
                                           ))
                                     ],
                                   ),
@@ -201,18 +199,53 @@ class _DashBoardState extends State<DashBoard> {
                                                 "assets/images/busImage.png",
                                                 fit: BoxFit.fill,
                                               )),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
 
+                                                  // width: 150,
 
-                                                Container(
-                                                  width: 150,
-                                                    child: Text(buses.bus_list?[index].name ?? "",maxLines: 1,overflow: TextOverflow.ellipsis,)),
+                                                  child: Text(
+                                                buses.bus_list?[index].name
+                                                        ?.split(" ")[0]
+                                                        .toString() ??
+                                                    "",
+                                              )),
+                                              Container(
 
+                                                  // width: 150,
 
-
+                                                  child: Text(
+                                                buses.bus_list?[index].name
+                                                        ?.split(" ")
+                                                        .sublist(1)
+                                                        .join(' ')
+                                                        .trim()
+                                                        .toString() ??
+                                                    "",
+                                              )),
+                                            ],
+                                          ),
                                           GestureDetector(
                                             onTap: () {
-                                              Navigator.of(context).push(MaterialPageRoute(
-                                                  builder: (context) => BusSeatLayOut(layout: buses.bus_list?[index].seat_count,)));
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BusSeatLayOut(
+                                                            layout: buses
+                                                                .bus_list?[
+                                                                    index]
+                                                                .type,
+                                                            busName: buses
+                                                                .bus_list?[
+                                                                    index]
+                                                                .name,
+                                                          )));
                                             },
                                             child: Container(
                                               padding: EdgeInsets.symmetric(
@@ -229,7 +262,9 @@ class _DashBoardState extends State<DashBoard> {
                                               )),
                                             ),
                                           ),
-                                          SizedBox(width: 10,)
+                                          SizedBox(
+                                            width: 10,
+                                          )
                                         ],
                                       ),
                                     );
@@ -244,8 +279,6 @@ class _DashBoardState extends State<DashBoard> {
                 }
               }
               return Container();
-            }
-
-            ));
+            }));
   }
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:moovbe/dashBoardScreen.dart';
 import 'package:moovbe/driverScreen.dart';
 import 'package:moovbe/loginScreen.dart';
-import 'package:moovbe/sharedPreferences/sharedPreferences.dart';
 import 'package:moovbe/splashScreen.dart';
 
-void main() async{
-
+void main() async {
   runApp(const MyApp());
 }
 
@@ -15,16 +14,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'Poppins'
-      ),
+      theme: ThemeData(fontFamily: 'Poppins'),
       routes: {
         '/loginScreen': (context) => LoginScreen(),
         '/driverScreen': (context) => DriverScreen(),
+        '/dashBoardScreen': (context) => DashBoard(),
       },
       debugShowCheckedModeBanner: false,
       home: WelcomeScreen(),
     );
   }
 }
-
